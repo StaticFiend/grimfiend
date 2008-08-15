@@ -108,8 +108,6 @@ while ($vars = mysql_fetch_array($result))
 echo "<tr class=\"header\"><td><b>Total Number of Videos</b></td><td></td><td></td><td><b>Total</b></td></tr>\n";
 echo "<tr><td>".$totalvids."</td><td></td><td></td><td>".$totalviews."</td></tr>\n";
 echo "</table>\n";
-//echo "<table class=\"bottom\">\n";
-//echo "<tr class=\"bottom\"><td class=\"bottom\"><p><small>PHP by Static Fiend, <a href=\"http://www.grimfiend.com/lp/vlp/phpsrc.zip\">click here</a> for the source code.</small></p></td></tr></table>\n";
 echo "<div class=\"bottom\"><br />PHP by Static Fiend, <a href=\"http://github.com/StaticFiend/grimfiend/tree/master\">click here</a> for the source code.<br /><br /></div>\n";
 
 mysql_close($dbh);
