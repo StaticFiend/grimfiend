@@ -15,9 +15,7 @@ dbConnect($dbh);
 <body>
 <?php
 
-//echo "<table>\n";
 echo "<div class=\"title\"><b>Video LP Index</b></div>\n";
-//echo "</table>\n";
 
 $sort = $_GET["sort"];
 
