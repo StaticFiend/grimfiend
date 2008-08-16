@@ -57,6 +57,10 @@ else if ($sort == "game" && $desc != 1)
 	echo "<tr class=\"header\"><td><a href=\"index.php?sort=title\"><b>Title</b></a></td><td><a href=\"index.php?sort=author\"><b>Author</b></a></td><td><a href=\"index.php?sort=game&amp;order=desc\"><b>Game</b></a></td><td><b>Views</b></td></tr>\n";
 else 
 	echo "<tr class=\"header\"><td><a href=\"index.php?sort=title\"><b>Title</b></a></td><td><a href=\"index.php?sort=author\"><b>Author</b></a></td><td><a href=\"index.php?sort=game\"><b>Game</b></a></td><td><b>Views</b></td></tr>\n";
+	
+$gravauthors = array("Static Fiend");
+$gravmd5 = array("6068e51acd8e531d91448132e392cc7b");
+
 while ($vars = mysql_fetch_array($result))
 {
 	$id = $vars["id"];
@@ -66,6 +70,26 @@ while ($vars = mysql_fetch_array($result))
 	$author = htmlspecialchars($vars["author"]);
 	$game = htmlspecialchars($vars["game"]);
 	$dnd = $vars["private"];
+	
+	$gravcheck = 0;
+	$x = 0;
+	
+	while ($x < count($gravauthors))
+	{
+		if (!strstr($gravauthors[$x], $author))
+		{
+			$x++;
+			continue;
+		}
+		else
+		{
+			$gravcheck = 1;
+			$gravid = $x;
+			break;
+		}
+		
+		$x++;
+	}
 	
 	$mov = $path.".mov";
 	$mp4 = $path.".mp4";
@@ -80,7 +104,10 @@ while ($vars = mysql_fetch_array($result))
 			{
 				echo "<tr>\n";
 				echo "<td><a href=\"http://www.grimfiend.com/lp/vlp/play.php?id=".$id."\">".$title."</a></td>";
-				echo "<td>".$author."</td>";
+				if ($gravcheck)
+					echo "<td><img src=\"http://www.gravatar.com/avatar/".$gravmd5[$gravid]."?s=15\" alt=\"author avatar\" /> ".$author."</td>";
+				else
+					echo "<td>".$author."</td>";
 				echo "<td>".$game."</td>";
 			}
 		}
