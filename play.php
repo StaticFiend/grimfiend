@@ -21,7 +21,7 @@ if ($count > 1 || $count < 1)
 	<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n";
 	echo "<head><title>ERROR</title></head>\n";
 	echo "<body><p>ERROR: Unable to obtain data from this id</p></body></html>\n";
-	exit("");
+	exit(""); // Yes even my error pages can be validated!
 }
 else
 {
@@ -117,11 +117,6 @@ if ($format == "mov" || $format == "mp4")
 		echo "s1.addVariable(\"width\",\"".intval($vars["width"])."\");\n";
 		echo "s1.addVariable(\"height\",\"".intval($vars["height"])."\");\n";
 	}
-	else
-	{
-		//echo "s1.addVariable(\"width\",\"100%\");\n";
-		//echo "s1.addVariable(\"height\",\"100%\");\n";
-	}
 	echo "s1.addVariable(\"file\",\"$video\");\n";
 	if ($vars["game"] != "Super Adventure Rockman")
 		echo "s1.addVariable(\"controlbar\", \"over\");\n";
@@ -147,11 +142,10 @@ else if ($format == "avi")
 	echo "</object></p>\n";
 	echo "<p><br />No video? Get the DivX Web Player for <a style=\"text-decoration: underline;\" href=\"http://download.divx.com/player/DivXWebPlayerInstaller.exe\">Windows</a> or <a style=\"text-decoration: underline;\" href=\"http://download.divx.com/player/DivXWebPlayer.dmg\">Mac</a></p>\n";
 }
-
 else
 {
-	exit("What the fuck did you do here?");
-	echo "</body></html>\n";
+	echo "<p>What the hell did you do?!?!</p></body></html>\n";
+	exit("");
 }
 ?>
 
