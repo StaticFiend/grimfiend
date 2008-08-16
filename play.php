@@ -154,7 +154,7 @@ else
 if ($fullscreen < 1)
 {
 	echo "<p><br /><a href=\"http://www.grimfiend.com/lp/vlp/$video\">Click here to download this video.</a></p>\n";
-	echo "<p><small>Page viewed:";
+	echo "<p><small>Page viewed: ";
 
 	if (!file_exists($path2."/views.txt"))
 	{
