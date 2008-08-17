@@ -76,7 +76,7 @@ while ($vars = mysql_fetch_array($result))
 	
 	while ($x < count($gravauthors))
 	{
-		if (!strstr($gravauthors[$x], $author))
+		if (!strstr($author, $gravauthors[$x]))
 		{
 			$x++;
 			continue;
