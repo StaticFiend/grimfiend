@@ -9,6 +9,8 @@ $idnum = stripslashes($idnum);
 $idnum = mysql_real_escape_string($idnum);
 $idnum = intval($idnum);
 
+$fullscreen = $_GET["fullscreen"];
+
 $sql = mysql_query("SELECT * FROM vidinfo WHERE id='$idnum'");
 $count = intval(mysql_num_rows($sql));
 
@@ -47,7 +49,7 @@ div#container {height: 100%}
 p {color: #<?php echo strtoupper(str_pad(dechex($vars['foreground']), 6, "0", STR_PAD_LEFT)); ?>; text-align: center; line-height: 7px}
 a {color: #AA3333; text-decoration: none;}
 img {border: 0px}
-html { height: 100%; overflow: hidden;}
+html { height: 100%; <?php if ($fullscreen == 1) echo "overflow: hidden;"; ?>}
 -->
 </style>
 </head>
@@ -75,7 +77,6 @@ else
 
 $video = $path.".".$format;
 $preview = $path.".".$imgformat;
-$fullscreen = $_GET["fullscreen"];
 	
 if (!file_exists($video))
 {
