@@ -105,7 +105,7 @@ while ($vars = mysql_fetch_array($result))
 				echo "<tr>\n";
 				echo "<td><a href=\"http://www.grimfiend.com/lp/vlp/play.php?id=".$id."\">".$title."</a></td>";
 				if ($gravcheck)
-					echo "<td><img src=\"http://www.gravatar.com/avatar/".$gravmd5[$gravid]."?s=15\" alt=\"author avatar\" /> ".$author."</td>";
+					echo "<td><img src=\"http://www.gravatar.com/avatar/".$gravmd5[$gravid]."?s=15&amp;r=x\" alt=\"author avatar\" /> ".$author."</td>";
 				else
 					echo "<td>".$author."</td>";
 				echo "<td>".$game."</td>";
