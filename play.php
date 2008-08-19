@@ -118,7 +118,7 @@ if ($format == "mov" || $format == "mp4")
 		echo "s1.addVariable(\"height\",\"".intval($vars["height"])."\");\n";
 	}
 	echo "s1.addVariable(\"file\",\"$video\");\n";
-	if ($vars["game"] != "Super Adventure Rockman")
+	if ($vars["game"] != "Super Adventure Rockman" && $vars["game"] != "Butcher Bay")
 		echo "s1.addVariable(\"controlbar\", \"over\");\n";
 	echo "s1.addVariable(\"image\", \"$preview\");\n";
 	echo "s1.write(\"container\");\n";
