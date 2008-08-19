@@ -58,8 +58,8 @@ else if ($sort == "game" && $desc != 1)
 else 
 	echo "<tr class=\"header\"><td><a href=\"index.php?sort=title\"><b>Title</b></a></td><td><a href=\"index.php?sort=author\"><b>Author</b></a></td><td><a href=\"index.php?sort=game\"><b>Game</b></a></td><td><b>Views</b></td></tr>\n";
 	
-$gravauthors = array("Static Fiend", "Garin", "Oyster");
-$gravmd5 = array("6068e51acd8e531d91448132e392cc7b", "aaf5ab479b4b76922cddcd6f94aa8679", "97c0590bb4ff5ad1be7040c68ce94195");
+$gravauthors = array("Static Fiend", "Garin", "Oyster", "Sartak");
+$gravmd5 = array("6068e51acd8e531d91448132e392cc7b", "aaf5ab479b4b76922cddcd6f94aa8679", "97c0590bb4ff5ad1be7040c68ce94195", "609c52819f220e49667a53cc0a82bfa7");
 
 while ($vars = mysql_fetch_array($result))
 {
