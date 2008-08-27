@@ -72,6 +72,7 @@ while ($vars = mysql_fetch_array($result))
 	$dnd = $vars["private"];
 	
 	$gravcheck = 0;
+	$videxists = 0;
 	$x = 0;
 	
 	while ($x < count($gravauthors))
@@ -95,27 +96,21 @@ while ($vars = mysql_fetch_array($result))
 	$mp4 = $path.".mp4";
 	$avi = $path.".avi";
 
-	if (file_exists($mov) || file_exists($mp4) || file_exists($avi) && $dnd != 1)
-		{
-			$videxists = 1;
-			$totalvids = $totalvids + intval(1);
-			
-			if ($dnd != 1)
-			{
-				echo "<tr>\n";
-				echo "<td><a href=\"http://www.grimfiend.com/lp/vlp/play.php?id=".$id."\">".$title."</a></td>";
-				if ($gravcheck)
-					echo "<td><img src=\"http://www.gravatar.com/avatar/".$gravmd5[$gravid]."?s=15&amp;r=x\" alt=\"author avatar\" /> ".$author."</td>";
-				else
-					echo "<td>".$author."</td>";
-				echo "<td>".$game."</td>";
-			}
-		}
-	if (!file_exists($path2."/views.txt") && $dnd != 1 && $videxists == 1)
+	if ((file_exists($mov) || file_exists($mp4) || file_exists($avi)) && $dnd < 1)
 	{
-		echo "<td>0</td>\n</tr>\n";
-		$videxists = 0;
+		$videxists = 1;
+		$totalvids = $totalvids + intval(1);
+		
+		echo "<tr>\n";
+		echo "<td><a href=\"play.php?id=".$id."\">".$title."</a></td>";
+		if ($gravcheck)
+			echo "<td><img src=\"http://www.gravatar.com/avatar/".$gravmd5[$gravid]."?s=15&amp;r=x\" alt=\"author avatar\" /> ".$author."</td>";
+		else
+			echo "<td>".$author."</td>";
+		echo "<td>".$game."</td>";
 	}
+	if (!file_exists($path2."/views.txt") && $dnd != 1 && $videxists == 1)
+		echo "<td>0</td>\n</tr>\n";
 	else if ($dnd != 1 && $videxists == 1)
 	{
 		$viewfile = fopen($path2."/views.txt", "r");
@@ -126,8 +121,6 @@ while ($vars = mysql_fetch_array($result))
 
 		echo "<td>".$viewnum."</td>\n";
 		echo "</tr>\n";
-		
-		$videxists = 0;
 	}
 }
 echo "<tr class=\"header\"><td><b>Total Number of Videos</b></td><td></td><td></td><td><b>Total</b></td></tr>\n";

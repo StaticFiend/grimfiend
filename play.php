@@ -46,7 +46,7 @@ else
 <!--
 body {background-color: #<?php echo strtoupper(str_pad(dechex($vars['background']), 6, "0", STR_PAD_LEFT)); ?>; padding: 0; margin: 0; height: 100%;}
 div#container {height: 100%}
-p {color: #<?php echo strtoupper(str_pad(dechex($vars['foreground']), 6, "0", STR_PAD_LEFT)); ?>; text-align: center; line-height: 7px}
+p {color: #<?php echo strtoupper(str_pad(dechex($vars['foreground']), 6, "0", STR_PAD_LEFT)); ?>; text-align: center; line-height: 7px; font-size: 13px}
 a {color: #AA3333; text-decoration: none;}
 img {border: 0px}
 html { height: 100%; <?php if ($fullscreen == 1) echo "overflow: hidden;"; ?>}
@@ -90,9 +90,9 @@ if (!file_exists($preview))
 //Banner code
 $game2 = str_replace(":", "", $vars["game"]);
 
-if (file_exists("logo/$game2.png"))
+if (file_exists("logo/$game2.png") && $fullscreen < 1)
 	echo "<p><img src=\"logo/$game2.png\" alt=\"$game logo\" /></p>\n";
-else if (file_exists ("logo/$game2.jpg"))
+else if (file_exists ("logo/$game2.jpg") && $fullscreen < 1)
 	echo "<p><img src=\"logo/$game2.jpg\" alt=\"$game logo\" /></p>\n";
 
 if ($fullscreen < 1)
@@ -155,7 +155,9 @@ else
 if ($fullscreen < 1)
 {
 	echo "<p><br /><a href=\"http://www.grimfiend.com/lp/vlp/$video\">Click here to download this video.</a></p>\n";
-	echo "<p><small>Page viewed: ";
+	if ($format == "mov" || $format == "mp4")
+		echo "<p>Want to watch in your full browser window?  <a href=\"play.php?id=$idnum&amp;fullscreen=1\">Click here!</a></p>\n";
+	echo "<p>Page viewed: ";
 
 	if (!file_exists($path2."/views.txt"))
 	{
@@ -208,18 +210,18 @@ if ($fullscreen < 1)
 
 		echo $viewnum." times.";
 	}
-	echo "</small></p>\n";
+	echo "</p>\n";
 }
 
 if (($format == "mov" || $format == "mp4") && $fullscreen < 1)
 {
-	echo "<p><small>Uses <a href=\"http://www.jeroenwijering.com/?item=JW_FLV_Media_Player\">JW FLV Media Player 4.1</a>, player skin <a href=\"http://www.longtailvideo.com/skins.asp\">Kleur</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href=\"http://github.com/StaticFiend/grimfiend/tree/master\">here</a>.</small></p>\n";
+	echo "<p>Uses <a href=\"http://www.jeroenwijering.com/?item=JW_FLV_Media_Player\">JW FLV Media Player 4.1</a>, player skin <a href=\"http://www.longtailvideo.com/skins.asp\">Kleur</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href=\"http://github.com/StaticFiend/grimfiend/tree/master\">here</a>.</p>\n";
 	echo "<p><a href=\"http://validator.w3.org/check?uri=referer\"><img src=\"http://www.w3.org/Icons/valid-xhtml10-blue\" alt=\"Valid XHTML 1.0 Strict\" height=\"31\" width=\"88\" /></a>\n";
 	echo "<a href=\"http://jigsaw.w3.org/css-validator/check/referer\"><img style=\"border:0;width:88px;height:31px\" src=\"http://jigsaw.w3.org/css-validator/images/vcss\" alt=\"Valid CSS!\" /></a></p>\n";
 }
 else if ($fullscreen < 1)
 {
-	echo "<p><small>PHP by Static Fiend.  Source code <a href=\"http://github.com/StaticFiend/grimfiend/tree/master\">here</a>.</small></p>";
+	echo "<p>PHP by Static Fiend.  Source code <a href=\"http://github.com/StaticFiend/grimfiend/tree/master\">here</a>.</p>";
 	echo "<p><a href=\"http://validator.w3.org/check?uri=referer\"><img src=\"http://www.w3.org/Icons/valid-xhtml10-blue\" alt=\"Valid XHTML 1.0 Strict\" height=\"31\" width=\"88\" /></a>\n";
 	echo "<a href=\"http://jigsaw.w3.org/css-validator/check/referer\"><img style=\"border:0;width:88px;height:31px\" src=\"http://jigsaw.w3.org/css-validator/images/vcss\" alt=\"Valid CSS!\" /></a></p>\n";
 }
