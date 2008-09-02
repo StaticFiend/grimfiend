@@ -44,9 +44,9 @@ else
 <title>GrimFiend Video LP Player - <?php echo htmlspecialchars($vars["title"])." by ".htmlspecialchars($vars["author"]); ?></title>
 <style type="text/css">
 <!--
-body {background-color: #<?php echo strtoupper(str_pad(dechex($vars['background']), 6, "0", STR_PAD_LEFT)); ?>; padding: 0; margin: 0; height: 100%;}
+body {background-color: #<?php echo strtoupper(str_pad(dechex($vars['background']), 6, "0", STR_PAD_LEFT)); ?>; padding: 0; margin: 0; height: 100%; text-align: center; font-family: arial, helvetica, sans-serif;}
 div#container {height: 100%}
-p {color: #<?php echo strtoupper(str_pad(dechex($vars['foreground']), 6, "0", STR_PAD_LEFT)); ?>; text-align: center; line-height: 7px; font-size: 13px}
+p {color: #<?php echo strtoupper(str_pad(dechex($vars['foreground']), 6, "0", STR_PAD_LEFT)); ?>; line-height: 7px; font-size: 12px}
 a {color: #AA3333; text-decoration: none;}
 img {border: 0px}
 html { height: 100%; <?php if ($fullscreen == 1) echo "overflow: hidden;"; ?>}
@@ -96,7 +96,7 @@ else if (file_exists ("logo/$game2.jpg") && $fullscreen < 1)
 	echo "<p><img src=\"logo/$game2.jpg\" alt=\"$game logo\" /></p>\n";
 
 if ($fullscreen < 1)
-	echo "<p><big><b>".htmlspecialchars($vars["title"])." by ".htmlspecialchars($vars["author"])."</b></big></p>\n";
+	echo "<p><b>".htmlspecialchars($vars["title"])." by ".htmlspecialchars($vars["author"])."</b></p>\n";
 
 if ($format == "mov" || $format == "mp4")
 {
