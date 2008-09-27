@@ -1,5 +1,4 @@
-<?php echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"; ?>
-<?php
+<? echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 include("../../misc.php");
 
 dbConnect($dbh);
@@ -41,20 +40,20 @@ else
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>GrimFiend Video LP Player - <?php echo htmlspecialchars($vars["title"])." by ".htmlspecialchars($vars["author"]); ?></title>
+<title>GrimFiend Video LP Player - <? echo htmlspecialchars($vars["title"])." by ".htmlspecialchars($vars["author"]); ?></title>
 <style type="text/css">
 <!--
-body {background-color: #<?php echo strtoupper(str_pad(dechex($vars['background']), 6, "0", STR_PAD_LEFT)); ?>; padding: 0; margin: 0; height: 100%; text-align: center; font-family: arial, helvetica, sans-serif;}
+body {background-color: #<? echo strtoupper(str_pad(dechex($vars['background']), 6, "0", STR_PAD_LEFT)); ?>; padding: 0; margin: 0; height: 100%; text-align: center; font-family: arial, helvetica, sans-serif;}
 div#container {height: 100%}
-p {color: #<?php echo strtoupper(str_pad(dechex($vars['foreground']), 6, "0", STR_PAD_LEFT)); ?>; line-height: 7px; font-size: 12px}
+p {color: #<? echo strtoupper(str_pad(dechex($vars['foreground']), 6, "0", STR_PAD_LEFT)); ?>; line-height: 7px; font-size: 12px}
 a {color: #AA3333; text-decoration: none;}
 img {border: 0px}
-html { height: 100%; <?php if ($fullscreen == 1) echo "overflow: hidden;"; ?>}
+html { height: 100%; <? if ($fullscreen == 1) echo "overflow: hidden;"; ?>}
 -->
 </style>
 </head>
 <body>
-<?php
+<?
 
 $path = $vars["dirname"]."/".$vars["dirname"];
 $path2 = $vars["dirname"];
@@ -99,58 +98,62 @@ if ($fullscreen < 1)
 	echo "<p><b>".htmlspecialchars($vars["title"])." by ".htmlspecialchars($vars["author"])."</b></p>\n";
 
 if ($format == "mov" || $format == "mp4")
-{
+{ 
 	if ($fullscreen > 0)
 		echo "<div style=\"width:100%; height:100%;\" id=\"container\"><a href=\"http://www.macromedia.com/go/getflashplayer\">Get the Flash Player</a> to see this player.</div>\n";
 	else
 		echo "<p id=\"container\"><a href=\"http://www.macromedia.com/go/getflashplayer\">Get the Flash Player</a> to see this player.</p>\n";
-	echo "<script type=\"text/javascript\" src=\"swfobject.js\"></script>\n";
-	echo "<script type=\"text/javascript\">\n";
-	if ($fullscreen > 0)
+	?>
+	<script type="text/javascript" src="swfobject.js"></script>
+	<script type="text/javascript">
+	<?if ($fullscreen > 0)
 		echo "var s1 = new SWFObject(\"player.swf\",\"player\",\"100%\",\"100%\",\"9.0.98\");\n";
 	else
 		echo "var s1 = new SWFObject(\"player.swf\",\"player\",\"".intval($vars["width"])."\",\"".intval($vars["height"])."\",\"9.0.98\");\n";
-	echo "s1.addVariable(\"skin\", \"http://www.grimfiend.com/lp/vlp/Kleur-mod-new.swf\");\n";
-	echo "s1.addParam(\"allowfullscreen\", \"true\");\n";
-	echo "s1.addVariable(\"fullscreen\",\"true\");\n";
+	?>
+	s1.addVariable("skin", "http://www.grimfiend.com/lp/vlp/Kleur-mod-new.swf");
+	s1.addParam("allowfullscreen", "true");
+	s1.addVariable("fullscreen","true");
+	<?
 	if ($fullscreen < 1)
-	{
-		echo "s1.addVariable(\"width\",\"".intval($vars["width"])."\");\n";
-		echo "s1.addVariable(\"height\",\"".intval($vars["height"])."\");\n";
+	{?>
+	s1.addVariable("width","<?=intval($vars["width"])?>");
+	s1.addVariable("height","<?=intval($vars["height"])?>");
+	<?
 	}
 	echo "s1.addVariable(\"file\",\"$video\");\n";
 	if ($vars["game"] != "Super Adventure Rockman" && $vars["game"] != "Butcher Bay")
 		echo "s1.addVariable(\"controlbar\", \"over\");\n";
-	echo "s1.addVariable(\"image\", \"$preview\");\n";
-	echo "s1.write(\"container\");\n";
-	echo "</script>\n";
+	?>
+	s1.addVariable("image", "<?=$preview?>");
+	s1.write("container");
+	</script>
+<?
 }
 else if ($format == "avi")
 {
-	$vars["height"] = intval($vars["height"]) + 20;
+	$vars["height"] = intval($vars["height"]) + 20; ?>
 
-	echo "<p><object type=\"video/divx\" data=\"$video\" width=\"".$vars["width"]."\" height=\"".$vars["height"]."\">\n";
-	echo "<param name=\"type\" value=\"video/divx\" />\n";
-	echo "<param name=\"src\" value=\"$video\" />\n";
-	echo "<param name=\"data\" value=\"$video\" />\n";
-	echo "<param name=\"codebase\" value=\"http://go.divx.com/plugin/DivXBrowserPlugin.cab\" />\n";
-	echo "<param name=\"custommode\" value=\"none\" />\n";
-	echo "<param name=\"autoPlay\" value=\"false\" />\n";
-	echo "<param name=\"previewImage\" value=\"$preview\" />\n";
-	echo "<param name=\"allowContextMenu\" value=\"true\" />\n";
-	echo "<param name=\"pluginspage\" value=\"http://go.divx.com/plugin/download/\" />\n";
-	echo "<param name=\"url\" value=\"$video\" />\n";
-	echo "</object></p>\n";
-	echo "<p><br />No video? Get the DivX Web Player for <a style=\"text-decoration: underline;\" href=\"http://download.divx.com/player/DivXWebPlayerInstaller.exe\">Windows</a> or <a style=\"text-decoration: underline;\" href=\"http://download.divx.com/player/DivXWebPlayer.dmg\">Mac</a></p>\n";
+	<p><object type="video/divx" data="<?=$video?>" width="<?=$vars["width"]?>" height="<?=$vars["height"]?>">
+	<param name="type" value="video/divx" />
+	<param name="src" value="<?=$video?>" />
+	<param name="data" value="<?=$video?>" />
+	<param name="codebase" value="http://go.divx.com/plugin/DivXBrowserPlugin.cab" />
+	<param name="custommode" value="none" />
+	<param name="autoPlay" value="false" />
+	<param name="previewImage" value="<?=$preview?>" />
+	<param name="allowContextMenu" value="true" />
+	<param name="pluginspage" value="http://go.divx.com/plugin/download/" />
+	<param name="url" value="<?=$video?>" />
+	</object></p>
+	<p><br />No video? Get the DivX Web Player for <a style="text-decoration: underline;" href="http://download.divx.com/player/DivXWebPlayerInstaller.exe">Windows</a> or <a style="text-decoration: underline;" href="http://download.divx.com/player/DivXWebPlayer.dmg">Mac</a></p>
+<?
 }
 else
 {
 	echo "<p>What the hell did you do?!?!</p></body></html>\n";
 	exit("");
 }
-?>
-
-<?php
 
 if ($fullscreen < 1)
 {
@@ -214,16 +217,18 @@ if ($fullscreen < 1)
 }
 
 if (($format == "mov" || $format == "mp4") && $fullscreen < 1)
-{
-	echo "<p>Uses <a href=\"http://www.jeroenwijering.com/?item=JW_FLV_Media_Player\">JW FLV Media Player 4.1</a>, player skin <a href=\"http://www.longtailvideo.com/skins.asp\">Kleur</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href=\"http://github.com/StaticFiend/grimfiend/tree/master\">here</a>.</p>\n";
-	echo "<p><a href=\"http://validator.w3.org/check?uri=referer\"><img src=\"http://www.w3.org/Icons/valid-xhtml10-blue\" alt=\"Valid XHTML 1.0 Strict\" height=\"31\" width=\"88\" /></a>\n";
-	echo "<a href=\"http://jigsaw.w3.org/css-validator/check/referer\"><img style=\"border:0;width:88px;height:31px\" src=\"http://jigsaw.w3.org/css-validator/images/vcss\" alt=\"Valid CSS!\" /></a></p>\n";
+{ ?>
+	<p>Uses <a href="http://www.jeroenwijering.com/?item=JW_FLV_Media_Player">JW FLV Media Player 4.1</a>, player skin <a href="http://www.longtailvideo.com/skins.asp">Kleur</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.</p>
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+	<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
+<?
 }
 else if ($fullscreen < 1)
-{
-	echo "<p>PHP by Static Fiend.  Source code <a href=\"http://github.com/StaticFiend/grimfiend/tree/master\">here</a>.</p>";
-	echo "<p><a href=\"http://validator.w3.org/check?uri=referer\"><img src=\"http://www.w3.org/Icons/valid-xhtml10-blue\" alt=\"Valid XHTML 1.0 Strict\" height=\"31\" width=\"88\" /></a>\n";
-	echo "<a href=\"http://jigsaw.w3.org/css-validator/check/referer\"><img style=\"border:0;width:88px;height:31px\" src=\"http://jigsaw.w3.org/css-validator/images/vcss\" alt=\"Valid CSS!\" /></a></p>\n";
+{ ?>
+	<p>PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.</p>
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+	<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
+<?
 }
 ?>
 
