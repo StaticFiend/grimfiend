@@ -119,7 +119,7 @@ if ($format == "mov" || $format == "mp4")
 	else
 		echo "var s1 = new SWFObject(\"player.swf\",\"player\",\"".intval($vars["width"])."\",\"".intval($vars["height"])."\",\"9.0.98\");\n";
 	?>
-	s1.addVariable("skin", "stylishmod.swf");
+	s1.addVariable("skin", "stylish_mod.swf");
 	s1.addParam("allowfullscreen", "true");
 	s1.addVariable("fullscreen","true");
 	<?
