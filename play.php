@@ -226,7 +226,7 @@ if ($fullscreen < 1)
 
 if (($format == "mov" || $format == "mp4") && $fullscreen < 1)
 { ?>
-	<p>Uses <a href="http://www.jeroenwijering.com/?item=JW_FLV_Media_Player">JW FLV Media Player 4.2.90</a>, player skin <a href="http://www.longtailvideo.com/skins.asp">Kleur</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.</p>
+	<p>Uses <a href="http://www.jeroenwijering.com/?item=JW_FLV_Media_Player">JW FLV Media Player 4.2.90</a>, player skin <a href="http://www.longtailvideo.com/AddOns/productpage.html?addon=50&amp;q=&amp;category=skins">Stylish</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.</p>
 	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
 	<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 <?
