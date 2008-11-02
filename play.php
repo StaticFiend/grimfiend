@@ -76,7 +76,13 @@ else
 
 $video = $path.".".$format;
 $preview = $path.".".$imgformat;
-	
+
+if ($vars["game"] == "Super Adventure Rockman" && $vars["game"] != "Butcher Bay")
+{
+	$noover = 1;
+	$height2 = $vars["height"] + 20;
+}
+
 if (!file_exists($video))
 {
 	echo "<p>ERROR: Unable to load video</p>\n";
@@ -108,10 +114,12 @@ if ($format == "mov" || $format == "mp4")
 	<script type="text/javascript">
 	<?if ($fullscreen > 0)
 		echo "var s1 = new SWFObject(\"player.swf\",\"player\",\"100%\",\"100%\",\"9.0.98\");\n";
+	else if ($noover == 1)
+		echo "var s1 = new SWFObject(\"player.swf\",\"player\",\"".intval($vars["width"])."\",\"".$height2."\",\"9.0.98\");\n";
 	else
 		echo "var s1 = new SWFObject(\"player.swf\",\"player\",\"".intval($vars["width"])."\",\"".intval($vars["height"])."\",\"9.0.98\");\n";
 	?>
-	s1.addVariable("skin", "http://www.grimfiend.com/lp/vlp/Kleur-mod-new.swf");
+	s1.addVariable("skin", "stylishmod.swf");
 	s1.addParam("allowfullscreen", "true");
 	s1.addVariable("fullscreen","true");
 	<?
@@ -122,7 +130,7 @@ if ($format == "mov" || $format == "mp4")
 	<?
 	}
 	echo "s1.addVariable(\"file\",\"$video\");\n";
-	if ($vars["game"] != "Super Adventure Rockman" && $vars["game"] != "Butcher Bay")
+	if ($noover != 1)
 		echo "s1.addVariable(\"controlbar\", \"over\");\n";
 	?>
 	s1.addVariable("image", "<?=$preview?>");
