@@ -78,6 +78,7 @@ if ($vars["game"] == "Super Adventure Rockman" && $vars["game"] != "Butcher Bay"
 
 if (!file_exists($video))
 {
+	echo "</head><body>\n";
 	echo "<p>ERROR: Unable to load video</p>\n";
 	echo "</body></html>";
 	exit("");
