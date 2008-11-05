@@ -70,7 +70,7 @@ else
 $video = $path.".".$format;
 $preview = $path.".".$imgformat;
 
-if ($vars["game"] == "Super Adventure Rockman" && $vars["game"] != "Butcher Bay")
+if ($vars["game"] == "Super Adventure Rockman" && $vars["game"] == "Butcher Bay")
 {
 	$noover = 1;
 	$height2 = $vars["height"] + 20;
