@@ -30,11 +30,6 @@ else
 	mysql_close($dbh);
 }
 ?>
-<!-- PHP Source that uses JW FLV Mediaplayer, anything in <script> is not my code and was written by its respective author.
-     Everything else, by Static Fiend (ME).
-
-     Use this for whatever. 
--->
 <!DOCTYPE html 
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -51,8 +46,6 @@ img {border: 0px}
 html { height: 100%; <? if ($fullscreen == 1) echo "overflow: hidden;"; ?>}
 -->
 </style>
-</head>
-<body>
 <?
 
 $path = $vars["dirname"]."/".$vars["dirname"];
@@ -92,7 +85,50 @@ if (!file_exists($video))
 if (!file_exists($preview))
 	$preview = "default.jpg";
 
-//Banner code
+if ($format == "mov" || $format == "mp4")
+{?>
+<script type="text/javascript" src="swfobject.js"></script>
+<script type="text/javascript">
+
+var flashvars = {
+skin: "stylish_mod.swf",
+fullscreen: "true",
+<?if ($fullscreen < 1)
+{?>
+width: "<?=intval($vars["width"])?>",
+height: "<?=intval($vars["height"])?>",
+<?}?>
+<?if ($noover != 1)
+{?>
+controlbar: "over",
+<?}?>
+image: "<?=$preview?>",
+file: "<?=$video?>"
+};
+
+var params = {
+allowfullscreen: "true"
+};
+
+var attributes = {};
+
+<?if ($fullscreen > 0)
+{?>
+swfobject.embedSWF("player.swf", "container", "100%", "100%", "9.0.98", false, flashvars, params, attributes);
+<?}
+else if ($noover == 1)
+{?>
+swfobject.embedSWF("player.swf", "container", "<?=intval($vars["width"])?>", <?=$height2?>, "9.0.98", false, flashvars, params, attributes);
+<?}
+else
+{?>
+swfobject.embedSWF("player.swf", "container", "<?=intval($vars["width"])?>", "<?=intval($vars["height"])?>", "9.0.98", false, flashvars, params, attributes);
+<?}
+}?>
+</script>
+</head>
+<body>
+<?//Banner code
 $game2 = str_replace(":", "", $vars["game"]);
 
 if (file_exists("logo/$game2.png") && $fullscreen < 1)
@@ -109,52 +145,24 @@ if ($format == "mov" || $format == "mp4")
 		echo "<div style=\"width:100%; height:100%;\" id=\"container\"><a href=\"http://www.macromedia.com/go/getflashplayer\">Get the Flash Player</a> to see this player.</div>\n";
 	else
 		echo "<p id=\"container\"><a href=\"http://www.macromedia.com/go/getflashplayer\">Get the Flash Player</a> to see this player.</p>\n";
-	?>
-	<script type="text/javascript" src="swfobject.js"></script>
-	<script type="text/javascript">
-	<?if ($fullscreen > 0)
-		echo "var s1 = new SWFObject(\"player.swf\",\"player\",\"100%\",\"100%\",\"9.0.98\");\n";
-	else if ($noover == 1)
-		echo "var s1 = new SWFObject(\"player.swf\",\"player\",\"".intval($vars["width"])."\",\"".$height2."\",\"9.0.98\");\n";
-	else
-		echo "var s1 = new SWFObject(\"player.swf\",\"player\",\"".intval($vars["width"])."\",\"".intval($vars["height"])."\",\"9.0.98\");\n";
-	?>
-	s1.addVariable("skin", "stylish_mod.swf");
-	s1.addParam("allowfullscreen", "true");
-	s1.addVariable("fullscreen","true");
-	<?
-	if ($fullscreen < 1)
-	{?>
-	s1.addVariable("width","<?=intval($vars["width"])?>");
-	s1.addVariable("height","<?=intval($vars["height"])?>");
-	<?
-	}
-	echo "s1.addVariable(\"file\",\"$video\");\n";
-	if ($noover != 1)
-		echo "s1.addVariable(\"controlbar\", \"over\");\n";
-	?>
-	s1.addVariable("image", "<?=$preview?>");
-	s1.write("container");
-	</script>
-<?
 }
 else if ($format == "avi")
 {
 	$vars["height"] = intval($vars["height"]) + 20; ?>
 
-	<p><object type="video/divx" data="<?=$video?>" width="<?=$vars["width"]?>" height="<?=$vars["height"]?>">
-	<param name="type" value="video/divx" />
-	<param name="src" value="<?=$video?>" />
-	<param name="data" value="<?=$video?>" />
-	<param name="codebase" value="http://go.divx.com/plugin/DivXBrowserPlugin.cab" />
-	<param name="custommode" value="none" />
-	<param name="autoPlay" value="false" />
-	<param name="previewImage" value="<?=$preview?>" />
-	<param name="allowContextMenu" value="true" />
-	<param name="pluginspage" value="http://go.divx.com/plugin/download/" />
-	<param name="url" value="<?=$video?>" />
-	</object></p>
-	<p><br />No video? Get the DivX Web Player for <a style="text-decoration: underline;" href="http://download.divx.com/player/DivXWebPlayerInstaller.exe">Windows</a> or <a style="text-decoration: underline;" href="http://download.divx.com/player/DivXWebPlayer.dmg">Mac</a></p>
+<p><object type="video/divx" data="<?=$video?>" width="<?=$vars["width"]?>" height="<?=$vars["height"]?>">
+<param name="type" value="video/divx" />
+<param name="src" value="<?=$video?>" />
+<param name="data" value="<?=$video?>" />
+<param name="codebase" value="http://go.divx.com/plugin/DivXBrowserPlugin.cab" />
+<param name="custommode" value="none" />
+<param name="autoPlay" value="false" />
+<param name="previewImage" value="<?=$preview?>" />
+<param name="allowContextMenu" value="true" />
+<param name="pluginspage" value="http://go.divx.com/plugin/download/" />
+<param name="url" value="<?=$video?>" />
+</object></p>
+<p><br />No video? Get the DivX Web Player for <a style="text-decoration: underline;" href="http://download.divx.com/player/DivXWebPlayerInstaller.exe">Windows</a> or <a style="text-decoration: underline;" href="http://download.divx.com/player/DivXWebPlayer.dmg">Mac</a></p>
 <?
 }
 else
@@ -226,27 +234,31 @@ if ($fullscreen < 1)
 
 if (($format == "mov" || $format == "mp4") && $fullscreen < 1)
 { ?>
-	<p>Uses <a href="http://www.jeroenwijering.com/?item=JW_FLV_Media_Player">JW FLV Media Player 4.2.90</a>, player skin <a href="http://www.longtailvideo.com/AddOns/productpage.html?addon=50&amp;q=&amp;category=skins">Stylish</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.</p>
-	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
-	<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
-<?
-}
-else if ($fullscreen < 1)
-{ ?>
-	<p>PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.</p>
-	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
-	<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
-<?
-}
-?>
-
+<p>Uses <a href="http://www.jeroenwijering.com/?item=JW_FLV_Media_Player">JW FLV Media Player 4.2.90</a>, player skin <a href="http://www.longtailvideo.com/AddOns/productpage.html?addon=50&amp;q=&amp;category=skins">Stylish</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.</p>
+<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <p><input type="hidden" name="cmd" value="_s-xclick" />
 <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" />
 <img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
 <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
 " /></p>
-
+<?
+}
+else if ($fullscreen < 1)
+{ ?>
+<p>PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.</p>
+<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<p><input type="hidden" name="cmd" value="_s-xclick" />
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+<img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+" /></p>
+<?
+}
+?>
 </form>
 </body>
 </html>
