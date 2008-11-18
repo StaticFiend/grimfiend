@@ -119,7 +119,7 @@ swfobject.embedSWF("player.swf", "container", "100%", "100%", "9.0.98", false, f
 <?}
 else if ($noover == 1)
 {?>
-swfobject.embedSWF("player.swf", "container", "<?=intval($vars["width"])?>", <?=$height2?>, "9.0.98", false, flashvars, params, attributes);
+swfobject.embedSWF("player.swf", "container", "<?=intval($vars["width"])?>", "<?=$height2?>", "9.0.98", false, flashvars, params, attributes);
 <?}
 else
 {?>
