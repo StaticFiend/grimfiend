@@ -108,7 +108,8 @@ file: "<?=$video?>"
 };
 
 var params = {
-allowfullscreen: "true"
+allowfullscreen: "true",
+bgcolor: "#000000"
 };
 
 var attributes = {};
