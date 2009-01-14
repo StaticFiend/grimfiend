@@ -51,6 +51,8 @@ html { height: 100%; <? if ($fullscreen == 1) echo "overflow: hidden;"; ?>}
 $path = $vars["dirname"]."/".$vars["dirname"];
 $path2 = $vars["dirname"];
 
+$exceptions = array("Super Adventure Rockman", "Super Mario Galaxy");
+
 if (file_exists($path.".mp4"))
 	$format = "mp4";
 else if (file_exists($path.".mov"))
@@ -70,7 +72,7 @@ else
 $video = $path.".".$format;
 $preview = $path.".".$imgformat;
 
-if ($vars["game"] == "Super Adventure Rockman" || $vars["game"] == "Butcher Bay")
+if (in_array($vars["game"], $exceptions))
 {
 	$noover = 1;
 	$height2 = $vars["height"] + 20;
