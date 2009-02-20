@@ -46,6 +46,30 @@ img {border: 0px}
 html { height: 100%; <? if ($fullscreen == 1) echo "overflow: hidden;"; ?>}
 -->
 </style>
+<script language="JavaScript">
+function fullscreen()
+{
+	del = document.getElementById("logo");
+	del.parentNode.removeChild(del);
+	del = document.getElementById("title");
+	del.parentNode.removeChild(del);
+	del = document.getElementById("fullscreen");
+	del.parentNode.removeChild(del);
+	del = document.getElementById("download");
+	del.parentNode.removeChild(del);
+	del = document.getElementById("views");
+	del.parentNode.removeChild(del);
+	del = document.getElementById("bottomText");
+	del.parentNode.removeChild(del);
+	del = document.getElementById("paypal");
+	del.parentNode.removeChild(del);
+	document.body.style.overflow = "hidden";
+	
+	vid = document.getElementById("container");
+	vid.style.width = "100%";
+	vid.style.height = "100%";
+}
+</script>
 <?
 
 $path = $vars["dirname"]."/".$vars["dirname"];
@@ -136,12 +160,12 @@ swfobject.embedSWF("player.swf", "container", "<?=intval($vars["width"])?>", "<?
 $game2 = str_replace(":", "", $vars["game"]);
 
 if (file_exists("logo/$game2.png") && $fullscreen < 1)
-	echo "<p><img src=\"logo/$game2.png\" alt=\"$game logo\" /></p>\n";
+	echo "<p id=\"logo\"><img src=\"logo/$game2.png\" alt=\"$game logo\" /></p>\n";
 else if (file_exists ("logo/$game2.jpg") && $fullscreen < 1)
-	echo "<p><img src=\"logo/$game2.jpg\" alt=\"$game logo\" /></p>\n";
+	echo "<p id=\"logo\"><img src=\"logo/$game2.jpg\" alt=\"$game logo\" /></p>\n";
 
 if ($fullscreen < 1)
-	echo "<p><b>".htmlspecialchars($vars["title"])." by ".htmlspecialchars($vars["author"])."</b></p>\n";
+	echo "<p id=\"title\"><b>".htmlspecialchars($vars["title"])." by ".htmlspecialchars($vars["author"])."</b></p>\n";
 
 if ($format == "mov" || $format == "mp4")
 { 
@@ -177,10 +201,10 @@ else
 
 if ($fullscreen < 1)
 {
-	echo "<p><br /><a href=\"http://www.grimfiend.com/lp/vlp/$video\">Click here to download this video.</a></p>\n";
+	echo "<p id=\"download\"><br /><a href=\"http://www.grimfiend.com/lp/vlp/$video\">Click here to download this video.</a></p>\n";
 	if ($format == "mov" || $format == "mp4")
-		echo "<p>Want to watch in your full browser window?  <a href=\"play.php?id=$idnum&amp;fullscreen=1\">Click here!</a></p>\n";
-	echo "<p>Page viewed: ";
+		echo "<p id=\"fullscreen\">Want to watch in your full browser window?  <a href=\"javascript:fullscreen()\">Click here!</a></p>\n";
+	echo "<p id=\"views\">Page viewed: ";
 
 	if (!file_exists($path2."/views.txt"))
 	{
@@ -238,11 +262,11 @@ if ($fullscreen < 1)
 
 if (($format == "mov" || $format == "mp4") && $fullscreen < 1)
 { ?>
-<p>Uses <a href="http://www.jeroenwijering.com/?item=JW_FLV_Media_Player">JW FLV Media Player 4.2.90</a>, player skin <a href="http://www.longtailvideo.com/AddOns/productpage.html?addon=50&amp;q=&amp;category=skins">Stylish</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.</p>
-<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+<p id="bottomText">Uses <a href="http://www.jeroenwijering.com/?item=JW_FLV_Media_Player">JW FLV Media Player 4.2.90</a>, player skin <a href="http://www.longtailvideo.com/AddOns/productpage.html?addon=50&amp;q=&amp;category=skins">Stylish</a> modified by jawbroken, PHP by Static Fiend.  Source code <a href="http://github.com/StaticFiend/grimfiend/tree/master">here</a>.<br /><br />
+<a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
 <a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<p><input type="hidden" name="cmd" value="_s-xclick" />
+<p id="paypal"><input type="hidden" name="cmd" value="_s-xclick" />
 <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" name="submit" alt="PayPal - The safer, easier way to pay online!" />
 <img alt="" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
 <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
