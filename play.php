@@ -46,7 +46,7 @@ img {border: 0px}
 html { height: 100%; <? if ($fullscreen == 1) echo "overflow: hidden;"; ?>}
 -->
 </style>
-<script language="JavaScript">
+<script type="text/javascript">
 function fullscreen()
 {
 	del = document.getElementById("logo");
@@ -151,9 +151,9 @@ swfobject.embedSWF("player.swf", "container", "<?=intval($vars["width"])?>", "<?
 else
 {?>
 swfobject.embedSWF("player.swf", "container", "<?=intval($vars["width"])?>", "<?=intval($vars["height"])?>", "9.0.98", false, flashvars, params, attributes);
-<?}
-}?>
+<?}?>
 </script>
+<?}?>
 </head>
 <body>
 <?//Banner code
