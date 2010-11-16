@@ -1,0 +1,69 @@
+body {
+background: #000033;
+font-size: small;
+}
+.options {
+margin: auto;
+text-align: center;
+background: #DDDDDD;
+color: black;
+width: 280px;
+height: 50px;
+border: 1px solid gray;
+}
+.video {
+margin: auto;
+background: #DDDDDD;
+color: black;
+width: 640px;
+height: 170px;
+border: 1px solid gray;
+}
+.logo {
+margin: auto;
+background: #DDDDDD;
+color: black;
+width: 480px;
+height: 120px;
+border: 1px solid gray;
+}
+.avatar {
+width: 25%;
+max-width: 25%;
+border: 1px solid #CCCCCC;
+background: black;
+}
+.info {
+text-align: center;
+width: 50%;
+max-width: 50%;
+border: 0px solid #4444bb;
+}
+.preview {
+background: black;
+width: 25%;
+max-width: 25%;
+border: 1px solid #CCCCCC;
+
+}
+tr {
+border: 0px;
+}
+td {
+max-height: 160px;
+height: 160px;
+}
+.blank {
+width: 0px;
+border: 0px solid black;
+}
+img {
+width: 100%;
+height: 100%;
+}
+a {
+color: #0000AA;
+}
+hr {
+width: 25%;
+}
